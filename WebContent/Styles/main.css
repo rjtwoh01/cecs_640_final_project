@@ -76,10 +76,18 @@ html, body {
 	margin-left: 70px;
 }
 
-.register-submit, .new-run-submit, .new-run-return-dashboard {
+.register-submit, .new-run-submit, .new-run-return-dashboard, .register-back {
 	font-size: large;
 	margin-top: 25px;
 	margin-left: 160px
+}
+
+.register-submit {
+	margin-left: 100px !important;
+}
+
+.register-back {
+	margin-left: 50px !important;
 }
 
 .new-run-submit {

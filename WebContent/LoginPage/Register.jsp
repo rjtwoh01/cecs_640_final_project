@@ -42,7 +42,8 @@
 					<input type="text" class="username-input" name="lnameInput"/>
 				</div>
 				
-				<input type="Submit" value="Submit" name="loginAction" class="register-submit"/>
+				<input type="Submit" value="Submit" name="submit" class="register-submit"/>
+				<input type="Submit" value="Back" name="back" class="register-back">
 				<div class="errorMessage"><%=errorMessage%></div>
 			</div>
 			

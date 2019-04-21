@@ -44,47 +44,52 @@ public class RegisterServlet extends HttpServlet {
 		String lname = request.getParameter("lnameInput");
 
 		String errorMessage = "You must fill out all fields to register";
-		if ((user == null || user.length() == 0) || (password == null || password.length() == 0) || (fname == null || fname.length() == 0) || (lname == null || lname.length() == 0)) {
-			url = "/FinalProject/LoginPage/Register.jsp";
-			
-			HttpSession session = request.getSession(false);
-			session.setAttribute("errorMessage", errorMessage);
-			response.sendRedirect(url);
-		} else if (!password.equals(verifiedPassword)) {
-			url = "/FinalProject/LoginPage/Register.jsp";
-			HttpSession session = request.getSession(false);
-			session.setAttribute("errorMessage", "Passwords should match!");
-			System.out.println(password);
-			System.out.println(verifiedPassword);
-			response.sendRedirect(url);
-		} else {
-			ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
-			connection = pool.getConnection();
-			if (connection != null) {
-				uc = new UsersController(connection);
-				if (uc.insertUser(user, password, fname, lname) != 0) {
-					url = "/FinalProject/LoginPage/Login.jsp";
-					HttpSession session = request.getSession(false);
-					session.setAttribute("registerMessage", "User successfully registered");
-					pool.freeConnection(connection);
-					response.sendRedirect(url);
+		if (request.getParameter("submit") != null) {
+			if ((user == null || user.length() == 0) || (password == null || password.length() == 0)
+					|| (fname == null || fname.length() == 0) || (lname == null || lname.length() == 0)) {
+				url = "/FinalProject/LoginPage/Register.jsp";
+
+				HttpSession session = request.getSession(false);
+				session.setAttribute("errorMessage", errorMessage);
+				response.sendRedirect(url);
+			} else if (!password.equals(verifiedPassword)) {
+				url = "/FinalProject/LoginPage/Register.jsp";
+				HttpSession session = request.getSession(false);
+				session.setAttribute("errorMessage", "Passwords should match!");
+				System.out.println(password);
+				System.out.println(verifiedPassword);
+				response.sendRedirect(url);
+			} else {
+				ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
+				connection = pool.getConnection();
+				if (connection != null) {
+					uc = new UsersController(connection);
+					if (uc.insertUser(user, password, fname, lname) != 0) {
+						url = "/FinalProject/LoginPage/Login.jsp";
+						HttpSession session = request.getSession(false);
+						session.setAttribute("registerMessage", "User successfully registered");
+						pool.freeConnection(connection);
+						response.sendRedirect(url);
+					} else {
+						pool.freeConnection(connection);
+
+						url = "/FinalProject/LoginPage/Register.jsp";
+						HttpSession session = request.getSession(false);
+						session.setAttribute("errorMessage", errorMessage);
+						response.sendRedirect(url);
+					}
+
 				} else {
-					pool.freeConnection(connection);
-					
 					url = "/FinalProject/LoginPage/Register.jsp";
+					// if request is not from HttpServletRequest, you should do a typecast before
 					HttpSession session = request.getSession(false);
-					session.setAttribute("errorMessage", errorMessage);
+					// save message in session
+					session.setAttribute("errorMessage", "There was an error connecting");
 					response.sendRedirect(url);
 				}
-
-			} else {
-				url = "/FinalProject/LoginPage/Register.jsp";
-				// if request is not from HttpServletRequest, you should do a typecast before
-				HttpSession session = request.getSession(false);
-				// save message in session
-				session.setAttribute("errorMessage", "There was an error connecting");
-				response.sendRedirect(url);
 			}
+		} else {
+			response.sendRedirect("/FinalProject/LoginPage/Login.jsp");
 		}
 	}
 
