@@ -1,0 +1,193 @@
+html, body {
+	background-color: #d9d9d9;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.hidden {
+	display: none;
+}
+
+.login-pannel-container {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 100px;
+}
+
+.login-pannel, .register-pannel, .dashboard-pannel, .new-run-pannel {
+	overflow: none;
+	background-color: white;
+	width: 400px;
+	height: 400px;
+	box-shadow: 5px 5px 5px black;
+}
+
+.register-pannel {
+	height: 700px !important;
+}
+
+.new-run-pannel {
+	width: 600px;
+}
+
+.dashboard-pannel {
+	height: 700px !important;
+	width: 1000px !important;
+}
+
+.credentials {
+	margin-top: 100px;
+}
+
+.username-label, .password-label, .password-verfiy-label {
+	margin-top: 25px;
+	width: 100%;
+	position: relative;
+	left: 175px;
+	margin-bottom: 25px;
+}
+
+.password-verfiy-label {
+	left: 150px !important
+}
+
+.username-entry {
+	width: 100%;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.username-input, .password-input {
+	border-radius: 30px;
+	border: 1px solid black;
+	width: 75%;
+	height: 20px;
+	margin-left: 40px;
+	padding-left: 25px;
+}
+
+.login-submit {
+	font-size: large;
+	margin-top: 25px;
+	margin-left: 70px;
+}
+
+.register-submit, .new-run-submit, .new-run-return-dashboard {
+	font-size: large;
+	margin-top: 25px;
+	margin-left: 160px
+}
+
+.new-run-submit {
+	margin-left: 180px !important;
+}
+
+.new-run-return-dashboard {
+	margin-left: 20px !important;
+}
+
+.dashboard-submit {
+	font-size: large;
+	margin-top: 10px;
+}
+
+textarea:focus, input:focus {
+	outline: none;
+}
+
+input[type=submit] {
+	padding: 5px 15px;
+	background: #ccc;
+	border: 0 none;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.errorMessage, .registerMessage, .newRunErrorMessage, .newRunAddedMessage {
+	margin-top: 25px;
+	margin-left: 75px;
+	font-weight: bold;
+	color: red;
+}
+
+.newRunErrorMessage {
+	margin-left: 175px !important;
+}
+
+.registerMessage {
+	color: green !important;
+	margin-left: 100px !important;
+}
+
+.newRunAddedMessage {
+	color: green !important;
+	margin-left: 220px !important;
+}
+
+.userInfo {
+	margin-top: 25px;
+	margin-left: 850px;
+	width: 15%;
+	font-size: large;
+}
+
+.newRunPannel, .newRacePannel, .newShoesPannel, .newEllipticalPannel,
+	.viewRunPannel, .viewRacePannel, .viewEllipticalPannel,
+	.viewShoesPannel {
+	width: 210px;
+	height: 200px;
+	box-shadow: 5px 5px 5px black;
+	margin-left: 30px;
+	margin-top: 30px;
+	text-align: center;
+	font-size: 29px;
+	background-color: #d9d9d9 !important;
+	line-height: 7;
+	border-radius: 50px !important;
+	padding: 0 !important;
+	border-width: 0 !important;
+}
+
+.options-container {
+	margin-top: 30px
+}
+
+.options-row {
+	display: inline-flex;
+}
+
+.run-label {
+	font-size: large;
+}
+
+.run-input {
+	border-radius: 10px;
+}
+
+.row {
+	display: inline-block;
+}
+
+.run-entry {
+	margin-left: 50px;
+	margin-bottom: 50px;
+}
+
+.newRunTitle {
+	font-size: 30px;
+	margin-top: 10px;
+	margin-left: 210px;
+}
+
+.NewRunTitleWrapper {
+	margin-top: 25px
+}
+
+.newRunInfoWrapper {
+	margin-top: 50px;
+}
