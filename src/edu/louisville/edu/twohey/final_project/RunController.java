@@ -3,11 +3,17 @@ package edu.louisville.edu.twohey.final_project;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Time;
+import edu.louisville.edu.twohey.final_project.*;
 
 public class RunController {
     private Connection dbConnection = null;
+    private ResultSet resultSet = null;
+    private Statement statement = null;
+    private String sqlResult = "";
     
 	public RunController(Connection dbConnection)
     {
@@ -48,5 +54,41 @@ public class RunController {
     	
     	return rc;
     }
+	
+	public void getAllRuns()
+    {
+		System.out.println("in getAllRuns()");
+		String sqlStatement = "SELECT * FROM RUNS";
+        try
+        {
+            statement = dbConnection.createStatement();
+            
+            try
+            {
+                resultSet = statement.executeQuery(sqlStatement);
+                sqlResult = SQLUtil.getHtmlTable(resultSet);
+                System.out.println(sqlResult);
+                resultSet.close();
+            }
+            catch (SQLException e)
+            {
+                System.out.println("Cannot execute query");
+                e.printStackTrace();
+            }
+            
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not create statment: " + e.getMessage());
+        }
+    }
+	
+	public ResultSet getResultSet() {
+		return this.resultSet;
+	}
+	
+	public String getSqlResult() {
+		return this.sqlResult;
+	}
 	
 }

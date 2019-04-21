@@ -1,6 +1,7 @@
 package edu.louisville.edu.twohey.final_project;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/DashboardServlet")
 public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Connection connection = null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,6 +37,20 @@ public class DashboardServlet extends HttpServlet {
 			response.sendRedirect(url);
 		else if (request.getParameter("newRun") != null)
 			response.sendRedirect("/FinalProject/Runs/NewRun.jsp");
+		else if (request.getParameter("viewRuns") != null)
+		{	
+			HttpSession session = request.getSession();
+			ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
+			connection = pool.getConnection();
+			RunController rc = new RunController(connection);
+			rc.getAllRuns();
+			String runs = rc.getSqlResult();
+			System.out.println("doGet runs:");
+			System.out.println(runs);
+			pool.freeConnection(connection);
+			session.setAttribute("runs", runs);
+			response.sendRedirect("/FinalProject/Runs/ViewRuns.jsp");
+		}
 		else
 			response.sendRedirect("/FinalProject/Dashboard/Dashboard.jsp");
 	}
@@ -45,6 +61,17 @@ public class DashboardServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	private void getRuns(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
+		connection = pool.getConnection();
+		RunController rc = new RunController(connection);
+		rc.getAllRuns();
+		String runs = rc.getSqlResult();
+		pool.freeConnection(connection);
+		session.setAttribute("runs", runs);
 	}
 
 }

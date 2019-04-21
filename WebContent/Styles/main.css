@@ -9,7 +9,7 @@ html, body {
 	display: none;
 }
 
-.login-pannel-container {
+.login-pannel-container, .view-runs-pannel-container {
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -17,12 +17,22 @@ html, body {
 	margin-top: 100px;
 }
 
-.login-pannel, .register-pannel, .dashboard-pannel, .new-run-pannel {
+.view-runs-pannel-container {
+	margin-top: 20px
+}
+
+.login-pannel, .register-pannel, .dashboard-pannel, .new-run-pannel,
+	.view-runs-pannel {
 	overflow: none;
 	background-color: white;
 	width: 400px;
 	height: 400px;
 	box-shadow: 5px 5px 5px black;
+}
+
+.view-runs-pannel {
+	width: 1000px;
+	height: 800px;
 }
 
 .register-pannel {
@@ -76,7 +86,8 @@ html, body {
 	margin-left: 70px;
 }
 
-.register-submit, .new-run-submit, .new-run-return-dashboard, .register-back {
+.register-submit, .new-run-submit, .new-run-return-dashboard, 
+	.register-backl, .view-runs-return-dashboard {
 	font-size: large;
 	margin-top: 25px;
 	margin-left: 160px
@@ -98,6 +109,10 @@ html, body {
 	margin-left: 20px !important;
 }
 
+.view-runs-return-dashboard {
+	margin-left: 475px !important;
+}
+
 .dashboard-submit {
 	font-size: large;
 	margin-top: 10px;
@@ -116,7 +131,8 @@ input[type=submit] {
 	border-radius: 5px;
 }
 
-.errorMessage, .registerMessage, .newRunErrorMessage, .newRunAddedMessage {
+.errorMessage, .registerMessage, .newRunErrorMessage,
+	.newRunAddedMessage {
 	margin-top: 25px;
 	margin-left: 75px;
 	font-weight: bold;
@@ -198,4 +214,15 @@ input[type=submit] {
 
 .newRunInfoWrapper {
 	margin-top: 50px;
+}
+
+.viewRunsTitle {
+	font-size: 30px;
+	margin-left: 450px;
+}
+
+.viewRunTableWrapper {
+	width: 90%;
+	height: 600px;
+	margin-left: 5%;
 }
