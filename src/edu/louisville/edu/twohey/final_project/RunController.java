@@ -27,20 +27,20 @@ public class RunController {
 //			PRIMARY KEY (ID))
 
 	
-	public int insertRun(double distance, Date dateRun, double goalTime, Time runTime, double goalDistance, int shoeID, int userID) {
+	public int insertRun(double distance, String dateRun, double goalTime, double runTime, double goalDistance, int shoeID, int userID) {
     	int rc = 0;
     	
-    	String template = "INSERT INTO RUNS(DISTANCE, DATE_RUN, GOAL_TIME, RUN_TIME, GOAL_DISTANCE, SHOE, USER, PLACE) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    	String template = "INSERT INTO RUNS(DISTANCE, DATE_RUN, GOAL_TIME, RUN_TIME, GOAL_DISTANCE, SHOE, USERID, PLACE) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     	try {
     		PreparedStatement ps = dbConnection.prepareStatement(template);
     		ps.setDouble(1, distance);
-    		ps.setDate(2, dateRun);
+    		ps.setString(2, dateRun);
     		ps.setDouble(3, goalTime);
-    		ps.setTime(4, runTime);
+    		ps.setDouble(4, runTime);
     		ps.setDouble(5, goalDistance);
     		ps.setInt(6, shoeID);
     		ps.setInt(7, userID);
-    		ps.setInt(8, 0);
+    		ps.setInt(8, 1);
     		rc = ps.executeUpdate();
     	} catch (SQLException e) {
     		System.out.println(e.getMessage());

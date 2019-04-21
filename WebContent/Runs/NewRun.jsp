@@ -18,7 +18,7 @@
 		
 		String successMessage = "";
 		Object success = session.getAttribute("successMessage");
-		if (error != null) {
+		if (success != null) {
 			successMessage = success.toString();
 			session.removeAttribute("successMessage");
 		}
@@ -68,7 +68,7 @@
 					<input class="new-run-submit"  type="Submit" value="Submit" name="submitNewRun"/>
 					<input class="new-run-return-dashboard"  type="Submit" value="Dashboard" name="returnToDashboard"/>
 					<div class="newRunErrorMessage"><%=errorMessage%></div>
-					<div class="newRunAddedMessage"><%=errorMessage%></div>
+					<div class="newRunAddedMessage"><%=successMessage%></div>
 				</div>
 
 
