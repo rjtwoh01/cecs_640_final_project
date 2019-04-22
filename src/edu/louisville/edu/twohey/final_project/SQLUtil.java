@@ -15,15 +15,21 @@ public class SQLUtil
         htmlRows.append("<tr>");
         for (int i = 1; i <= columnCount; i++)
             htmlRows.append("<td><b>" + metaData.getColumnName(i) + "</td>");
+        htmlRows.append("<td><b>Edit</td>");
         htmlRows.append("</tr>");
+        int j = 1;
         while (results.next())
         {
             htmlRows.append("<tr>");
             for (int i = 1; i <= columnCount; i++)
                 htmlRows.append("<td>" + results.getString(i) + "</td>");
+            htmlRows.append("<td><input type='Submit' class='table-submit' value='EDIT' name='table_" + results.getString(1) + "'></td>");
+            if (results.getInt(1) > j)
+            	j = results.getInt(1);
         }
         htmlRows.append("</tr>");
         htmlRows.append("</table>");
+        htmlRows.append("<input class='hidden number-of-rows' value='" + String.valueOf(j) + "' name='numberOfRows'/>");
         return htmlRows.toString();
     }
     /**

@@ -57,7 +57,6 @@ public class RunController {
 	
 	public void getAllRuns()
     {
-		System.out.println("in getAllRuns()");
 		String sqlStatement = "SELECT * FROM RUNS";
         try
         {
@@ -67,7 +66,6 @@ public class RunController {
             {
                 resultSet = statement.executeQuery(sqlStatement);
                 sqlResult = SQLUtil.getHtmlTable(resultSet);
-                System.out.println(sqlResult);
                 resultSet.close();
             }
             catch (SQLException e)

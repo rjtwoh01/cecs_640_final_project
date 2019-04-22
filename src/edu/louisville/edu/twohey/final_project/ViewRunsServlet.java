@@ -26,7 +26,27 @@ public class ViewRunsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/FinalProject/Dashboard/Dashboard.jsp");
+		if (request.getParameter("returnToDashboard") != null) {
+			response.sendRedirect("/FinalProject/Dashboard/Dashboard.jsp");
+		}
+		else if (request.getParameter("numberOfRows") != null)
+		{
+			System.out.println("numberOfRows != null");
+			int rowCount = Integer.parseInt(request.getParameter("numberOfRows"));
+			int id = 0;
+			
+			for (int i = 1; i <= rowCount; i++) {
+				String editName = "table_" + String.valueOf(i);
+				if (request.getParameter(editName) != null) {
+					//Perform logic to redirect to edit page and set appropriate session values...
+					//Will need to do another query to get this specific set of values to edit
+					System.out.println("Found the edit button! - " + editName);
+					id = i;
+					System.out.println("id: " + id);
+				}
+			}
+		}
+		
 	}
 
 	/**

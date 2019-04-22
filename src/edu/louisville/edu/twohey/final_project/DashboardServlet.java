@@ -39,16 +39,7 @@ public class DashboardServlet extends HttpServlet {
 			response.sendRedirect("/FinalProject/Runs/NewRun.jsp");
 		else if (request.getParameter("viewRuns") != null)
 		{	
-			HttpSession session = request.getSession();
-			ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
-			connection = pool.getConnection();
-			RunController rc = new RunController(connection);
-			rc.getAllRuns();
-			String runs = rc.getSqlResult();
-			System.out.println("doGet runs:");
-			System.out.println(runs);
-			pool.freeConnection(connection);
-			session.setAttribute("runs", runs);
+			getRuns(request);
 			response.sendRedirect("/FinalProject/Runs/ViewRuns.jsp");
 		}
 		else
