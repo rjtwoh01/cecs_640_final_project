@@ -37,6 +37,8 @@ public class DashboardServlet extends HttpServlet {
 			response.sendRedirect(url);
 		else if (request.getParameter("newRun") != null)
 			response.sendRedirect("/FinalProject/Runs/NewRun.jsp");
+		else if (request.getParameter("newRace") != null)
+			response.sendRedirect("/FinalProject/Races/NewRace.jsp");
 		else if (request.getParameter("viewRuns") != null)
 		{	
 			getRuns(request);
