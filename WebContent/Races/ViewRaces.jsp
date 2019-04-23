@@ -32,13 +32,13 @@
 		}
 	%>
 	
-	<form action="../ViewRunsServlet">
+	<form action="../ViewRacesServlet">
 		<div class="view-runs-pannel-container">
 			<div class="view-runs-pannel">
 				<div class="NewRunTitleWrapper">
-					<span class="viewRunsTitle">View Runs</span>
+					<span class="viewRunsTitle">View Races</span>
 				</div>
-				<div class="viewRunTableWrapper">${runs}</div>
+				<div class="viewRunTableWrapper">${races}</div>
 				
 				
 				<!-- <input class="new-run-submit" type="Submit" value="Submit" name="submitNewRun" />  -->

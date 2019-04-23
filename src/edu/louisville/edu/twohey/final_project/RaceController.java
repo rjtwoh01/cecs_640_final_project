@@ -60,7 +60,7 @@ public class RaceController {
 	public int updateRace(double distance, String dateRun, double goalTime, double runTime, int shoeID, int userID, int runID) {
 		int rc = 0;
 
-		String template = "UPDATE RACES SET (DISTANCE, DATE_RUN, GOAL_TIME, RUN_TIME, SHOE, USERID, PLACE) = (?, ?, ?, ?, ?, ?, ?) WHERE ID = "
+		String template = "UPDATE RACES SET (RACE_DISTANCE, DATE_RUN, GOAL_TIME, TIME_COMPLETED, SHOE, USERID, PLACE) = (?, ?, ?, ?, ?, ?, ?) WHERE ID = "
 				+ String.valueOf(runID);
 		try {
 			PreparedStatement ps = dbConnection.prepareStatement(template);
@@ -98,19 +98,19 @@ public class RaceController {
 		}
 	}
 
-	public boolean getRunsByID(int runID) {
+	public boolean getRacesByID(int runID) {
 		boolean rc = false;
-		String template = "SELECT * FROM RUNS WHERE ID = '" + runID + "'";
+		String template = "SELECT * FROM RACES WHERE ID = '" + runID + "'";
 		try {
-			// (DISTANCE DATE_RUN, GOAL_TIME, RUN_TIME, GOAL_DISTANCE, SHOE, USERID, PLACE)
+			// (DISTANCE DATE_RUN, GOAL_TIME, RUN_TIME, SHOE, USERID, PLACE)
 			Statement s = dbConnection.createStatement();
 			ResultSet rs = s.executeQuery(template);
 			if (rs.next()) {
 				rc = true;
-				setDistance(rs.getDouble("DISTANCE"));
+				setDistance(rs.getDouble("RACE_DISTANCE"));
 				setDateRun(rs.getString("DATE_RUN"));
 				setGoalTime(rs.getDouble("GOAL_TIME"));
-				setRunTime(rs.getDouble("RUN_TIME"));
+				setRunTime(rs.getDouble("TIME_COMPLETED"));
 				setUserID(rs.getInt("USERID"));
 				setShoeID(rs.getInt("SHOE"));
 			}
@@ -120,10 +120,10 @@ public class RaceController {
 		return (rc);
 	}
 
-	public int deleteRun(int runID) {
+	public int deleteRace(int runID) {
 		int rc = 0;
 
-		String template = "DELETE FROM RUNS WHERE ID = " + String.valueOf(runID);
+		String template = "DELETE FROM RACES WHERE ID = " + String.valueOf(runID);
 		try {
 			PreparedStatement ps = dbConnection.prepareStatement(template);
 			rc = ps.executeUpdate();

@@ -44,6 +44,10 @@ public class DashboardServlet extends HttpServlet {
 			getRuns(request);
 			response.sendRedirect("/FinalProject/Runs/ViewRuns.jsp");
 		}
+		else if (request.getParameter("viewRaces") != null) {
+			getRaces(request);
+			response.sendRedirect("/FinalProject/Races/ViewRaces.jsp");
+		}
 		else
 			response.sendRedirect("/FinalProject/Dashboard/Dashboard.jsp");
 	}
@@ -65,6 +69,17 @@ public class DashboardServlet extends HttpServlet {
 		String runs = rc.getSqlResult();
 		pool.freeConnection(connection);
 		session.setAttribute("runs", runs);
+	}
+	
+	private void getRaces(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
+		connection = pool.getConnection();
+		RaceController rc = new RaceController(connection);
+		rc.getAllRaces();
+		String runs = rc.getSqlResult();
+		pool.freeConnection(connection);
+		session.setAttribute("races", runs);
 	}
 
 }
