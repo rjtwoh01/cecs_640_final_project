@@ -225,4 +225,5 @@ input[type=submit] {
 	width: 90%;
 	height: 600px;
 	margin-left: 5%;
+	overflow: scroll;
 }

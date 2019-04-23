@@ -71,6 +71,28 @@ public class ShoeController {
         return (rc);
     }
 	
+	public boolean findShoeByID(int shoeID) {
+		boolean rc = false;
+        this.shoeName = "";
+        String template = "SELECT * FROM SHOES WHERE ID = '" + shoeID + "'";
+        try
+        {
+            Statement s = dbConnection.createStatement();
+            ResultSet rs = s.executeQuery(template);
+            if (rs.next())
+            {
+                rc = true;
+                setShoeName(rs.getString("NAME"));
+                setShoeID(rs.getInt("ID"));
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return (rc);
+	}
+	
 	public void setShoeName(String name) {
 		this.shoeName = name;
 	}
