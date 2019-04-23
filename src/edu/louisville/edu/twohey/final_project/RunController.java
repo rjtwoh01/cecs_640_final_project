@@ -113,7 +113,6 @@ public class RunController {
 	public boolean getRunsByID(int runID) {
 		boolean rc = false;
         String template = "SELECT * FROM RUNS WHERE ID = '" + runID + "'";
-        System.out.println(runID);
         try
         {
         	//(DISTANCE DATE_RUN, GOAL_TIME, RUN_TIME, GOAL_DISTANCE, SHOE, USERID, PLACE)

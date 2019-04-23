@@ -132,7 +132,7 @@ input[type=submit] {
 }
 
 .errorMessage, .registerMessage, .newRunErrorMessage,
-	.newRunAddedMessage {
+	.newRunAddedMessage, .viewRunsSuccessMessage {
 	margin-top: 25px;
 	margin-left: 75px;
 	font-weight: bold;
@@ -151,6 +151,12 @@ input[type=submit] {
 .newRunAddedMessage {
 	color: green !important;
 	margin-left: 220px !important;
+}
+
+.viewRunsSuccessMessage {
+	color: green !important;
+    margin-left: 400px;
+    font-size: 24px;
 }
 
 .userInfo {
@@ -202,10 +208,14 @@ input[type=submit] {
 	margin-bottom: 50px;
 }
 
-.newRunTitle {
+.newRunTitle, .editRunTitle {
 	font-size: 30px;
 	margin-top: 10px;
 	margin-left: 210px;
+}
+
+.editRunTitle {
+	margin-left: 240px !important;
 }
 
 .NewRunTitleWrapper {
@@ -225,5 +235,5 @@ input[type=submit] {
 	width: 90%;
 	height: 600px;
 	margin-left: 5%;
-	overflow: scroll;
+	overflow: auto;
 }

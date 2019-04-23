@@ -28,7 +28,7 @@
 		<div class="login-pannel-container">
 			<div class="new-run-pannel">
 				<div class="NewRunTitleWrapper">
-					<span class="newRunTitle">Edit Run</span>
+					<span class="editRunTitle">Edit Run</span>
 				</div>
 				<div class="newRunInfoWrapper">
 
@@ -66,7 +66,7 @@
 					</div>
 
 					<input class="new-run-submit"  type="Submit" value="Submit" name="submitNewRun"/>
-					<input class="new-run-return-dashboard"  type="Submit" value="Dashboard" name="returnToDashboard"/>
+					<input class="new-run-return-dashboard"  type="Submit" value="View Runs" name="returnToViewRuns"/>
 					<div class="newRunErrorMessage"><%=errorMessage%></div>
 					<div class="newRunAddedMessage"><%=successMessage%></div>
 				</div>

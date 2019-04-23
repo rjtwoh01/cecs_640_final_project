@@ -36,7 +36,6 @@ public class ViewRunsServlet extends HttpServlet {
 		if (request.getParameter("returnToDashboard") != null) {
 			response.sendRedirect("/FinalProject/Dashboard/Dashboard.jsp");
 		} else if (request.getParameter("numberOfRows") != null) {
-			System.out.println("numberOfRows != null");
 			int rowCount = Integer.parseInt(request.getParameter("numberOfRows"));
 			int id = 0;
 
@@ -45,9 +44,7 @@ public class ViewRunsServlet extends HttpServlet {
 				if (request.getParameter(editName) != null) {
 					// Perform logic to redirect to edit page and set appropriate session values...
 					// Will need to do another query to get this specific set of values to edit
-					System.out.println("Found the edit button! - " + editName);
 					id = i;
-					System.out.println("id: " + id);
 
 					ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
 					connection = pool.getConnection();
@@ -63,10 +60,8 @@ public class ViewRunsServlet extends HttpServlet {
 							double goalDistance = rc.getGoalDistance();
 							int shoeID = rc.getShoeID();
 							int userID = rc.getUserID();
-							System.out.println("Found run");
 							
 							if (sc.findShoeByID(shoeID) == true) {
-								System.out.println("Found shoe");
 								String shoeName = sc.getShoeName();
 								session.setAttribute("distanceMessage", runDistance);
 								session.setAttribute("runTimeMessage", runTime);

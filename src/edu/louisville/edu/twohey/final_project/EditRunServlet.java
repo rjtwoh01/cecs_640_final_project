@@ -32,6 +32,7 @@ public class EditRunServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
+		String url = "/FinalProject/Runs/ViewRuns.jsp";
 		if (session.getAttribute("userID") != null || session.getAttribute("username") != null) {
 			int userID = Integer.parseInt(session.getAttribute("userID").toString());
 			if (request.getParameter("submitNewRun") != null) {
@@ -46,16 +47,9 @@ public class EditRunServlet extends HttpServlet {
 					String shoeName = request.getParameter("shoe");
 					Object runIDObject = session.getAttribute("runID");
 					String runIDString = "0";
-					System.out.println("distanceString - " + distanceString);
-					System.out.println("dateRun - " + dateRun);
-					System.out.println("goalDistanceString - " + goalDistanceString);
-					System.out.println("shoeName - " + shoeName);
-					System.out.println("runIDObject - " + runIDObject.toString());
-					System.out.println("runIDString - " + runIDString);
 		
 					if (runIDObject != null)
 						runIDString = runIDObject.toString();
-					System.out.println("runIDString: " + runIDString);
 						 
 						
 					if (distanceString == null || dateRun == null || goalTimeString == null || runTimeString == null
@@ -67,64 +61,61 @@ public class EditRunServlet extends HttpServlet {
 						else
 							session.setAttribute("errorMessage", "This run does not exist");
 					} else {
-						System.out.println("No missing fields");
 						double distance = Double.parseDouble(distanceString);
-						System.out.println("distance - " + distance);
 						double goalDistance = Double.parseDouble(goalDistanceString);
-						System.out.println("goalDistance - " + goalDistance);
 						double goalTime = Double.parseDouble(goalTimeString);
-						System.out.println("goalTime - " + goalTime);
 						double runTime = Double.parseDouble(runTimeString);
-						System.out.println("runTime - " + runTime);
 						int runID = Integer.parseInt(runIDString);
-						System.out.println("runID - " + runID);
 						
-						System.out.println("Getting connection...");
 						ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
 						connection = pool.getConnection();
 						if (connection != null) {
-							System.out.println("Got connection");
 							ShoeController sc = new ShoeController(connection);
 							RunController rc = new RunController(connection);
 							
 							if (sc.findShoe(shoeName, userID) == false ) {
-								System.out.println("No shoe");
 								if (sc.insertShoe(shoeName, userID) != 0) {
-									System.out.println("Shoe inserted");
 									if (sc.findShoe(shoeName, userID) == true ) {
-										System.out.println("Shoe found");
 										int shoeID = sc.getShoeID();
 										if (rc.updateRun(distance, dateRun, goalTime, runTime, goalDistance, shoeID, userID, runID) != 0) {
 											session.setAttribute("successMessage", successMessage);
-											System.out.println("run updated");
+											rc.getAllRuns();
+											String runs = rc.getSqlResult();
+											session.setAttribute("runs", runs);
 										}
 										else {
+											url = "/FinalProject/Runs/EditRun.jsp";
 											session.setAttribute("errorMessage", errorMessage);
 										}
 									}
 									else {
+										url = "/FinalProject/Runs/EditRun.jsp";
 										session.setAttribute("errorMessage", errorMessage);
 									}
 								}
 								else {
+									url = "/FinalProject/Runs/EditRun.jsp";
 									session.setAttribute("errorMessage", errorMessage);
 								}
 							} else if (sc.findShoe(shoeName, userID) == true ) {
-								System.out.println("Shoe found");
 								int shoeID = sc.getShoeID();
-								System.out.println(shoeID);
 								if (rc.updateRun(distance, dateRun, goalTime, runTime, goalDistance, shoeID, userID, runID) != 0) {
-									System.out.println("run updated");
 									session.setAttribute("successMessage", successMessage);
+									rc.getAllRuns();
+									String runs = rc.getSqlResult();
+									session.setAttribute("runs", runs);
 								} else {
+									url = "/FinalProject/Runs/EditRun.jsp";
 									session.setAttribute("errorMessage", errorMessage);
 								}
 							}
 							else {
+								url = "/FinalProject/Runs/EditRun.jsp";
 								session.setAttribute("errorMessage", errorMessage);
 							}
 							pool.freeConnection(connection);
 						} else {
+							url = "/FinalProject/Runs/EditRun.jsp";
 							session.setAttribute("errorMessage", "Could not connect to the session");
 						}
 
@@ -133,11 +124,11 @@ public class EditRunServlet extends HttpServlet {
 					System.out.println(e);
 					session.setAttribute("errorMessage", e.toString());
 				}
-				response.sendRedirect("/FinalProject/Runs/EditRun.jsp");
-			} else if (request.getParameter("returnToDashboard") != null)
-				response.sendRedirect("/FinalProject/Dashboard/Dashboard.jsp");
+				response.sendRedirect(url);
+			} else if (request.getParameter("returnToViewRuns") != null)
+				response.sendRedirect("/FinalProject/Runs/ViewRuns.jsp");
 			else
-				response.sendRedirect("/FinalProject/Runs/EditRun.jsp");
+				response.sendRedirect(url);
 		} else {
 			response.sendRedirect("/FinalProject/LoginPage/Login.jsp");
 		}

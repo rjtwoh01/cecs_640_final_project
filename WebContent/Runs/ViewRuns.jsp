@@ -37,7 +37,7 @@
 				<!-- <input class="new-run-submit" type="Submit" value="Submit" name="submitNewRun" />  -->
 				<input class="view-runs-return-dashboard" type="Submit"
 					value="Dashboard" name="returnToDashboard" />
-
+				<div class="viewRunsSuccessMessage"><%=successMessage%></div>
 			</div>
 		</div>
 	</form>
