@@ -23,6 +23,13 @@
 			successMessage = success.toString();
 			session.removeAttribute("successMessage");
 		}
+		
+		String deletedSuccessMessage = "";
+		Object deletedSuccess = session.getAttribute("deletedSuccessMessage");
+		if (deletedSuccess != null) {
+			deletedSuccessMessage = deletedSuccess.toString();
+			session.removeAttribute("deletedSuccessMessage");
+		}
 	%>
 	
 	<form action="../ViewRunsServlet">
@@ -37,7 +44,9 @@
 				<!-- <input class="new-run-submit" type="Submit" value="Submit" name="submitNewRun" />  -->
 				<input class="view-runs-return-dashboard" type="Submit"
 					value="Dashboard" name="returnToDashboard" />
+					<div class="viewRunsErrorMessage"><%=errorMessage%></div>
 				<div class="viewRunsSuccessMessage"><%=successMessage%></div>
+				<div class="viewRunsDeletedSuccessMessage"><%=deletedSuccessMessage%></div>
 			</div>
 		</div>
 	</form>

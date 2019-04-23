@@ -31,7 +31,7 @@ html, body {
 }
 
 .view-runs-pannel {
-	width: 1000px;
+	width: 1060px;
 	height: 800px;
 }
 
@@ -132,7 +132,7 @@ input[type=submit] {
 }
 
 .errorMessage, .registerMessage, .newRunErrorMessage,
-	.newRunAddedMessage, .viewRunsSuccessMessage {
+	.newRunAddedMessage, .viewRunsSuccessMessage, .viewRunsErrorMessage, .viewRunsDeletedSuccessMessage {
 	margin-top: 25px;
 	margin-left: 75px;
 	font-weight: bold;
@@ -157,6 +157,17 @@ input[type=submit] {
 	color: green !important;
     margin-left: 400px;
     font-size: 24px;
+}
+
+.viewRunsErrorMessage {
+	margin-left: 350px;
+	font-size: 24px;
+}
+
+.viewRunsDeletedSuccessMessage {
+	margin-left: 460px !important;
+	font-size: 24px;
+	color: green !important;
 }
 
 .userInfo {
@@ -228,7 +239,7 @@ input[type=submit] {
 
 .viewRunsTitle {
 	font-size: 30px;
-	margin-left: 450px;
+	margin-left: 470px;
 }
 
 .viewRunTableWrapper {

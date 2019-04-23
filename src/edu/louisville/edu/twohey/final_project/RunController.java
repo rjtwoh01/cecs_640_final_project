@@ -137,6 +137,20 @@ public class RunController {
         return (rc);
 	}
 	
+	public int deleteRun(int runID) {
+		int rc = 0;
+    	
+    	String template = "DELETE FROM RUNS WHERE ID = " + String.valueOf(runID); 
+    	try {
+    		PreparedStatement ps = dbConnection.prepareStatement(template);
+    		rc = ps.executeUpdate();
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    	}
+    	
+    	return rc;
+	}
+	
 //	private double runDistance = 0;
 //    private String dateRun = "";
 //    private double goalTime = 0;
