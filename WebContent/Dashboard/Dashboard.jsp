@@ -37,7 +37,7 @@
 							<input class="newRunPannel" name="newRun" type="Submit" value="New Run" ></input>
 							<input class="newRacePannel" name="newRace" type="Submit" value="New Race"></input>
 							<input class="newShoesPannel" name="newElliptical" type="Submit" value="New Elliptical"></input>
-							<input class="newEllipticalPannel" name="newShoes" type="Submit" value="New Shoes"></input>
+							<input class="newEllipticalPannel" name="newShoe" type="Submit" value="New Shoes"></input>
 						</div>
 					</div>
 					<div class="options-set-2">

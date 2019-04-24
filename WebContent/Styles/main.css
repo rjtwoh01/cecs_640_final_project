@@ -231,6 +231,11 @@ input[type=submit] {
 	display: inline-flex;
 }
 
+.race-row-last {
+	display: inline-flex;
+	width: 100%;
+}
+
 .run-entry {
 	margin-left: 50px;
 	margin-bottom: 50px;

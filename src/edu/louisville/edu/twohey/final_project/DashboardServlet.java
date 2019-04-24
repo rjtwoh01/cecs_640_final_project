@@ -43,6 +43,8 @@ public class DashboardServlet extends HttpServlet {
 				response.sendRedirect("/FinalProject/Runs/NewRun.jsp");
 			else if (request.getParameter("newRace") != null)
 				response.sendRedirect("/FinalProject/Races/NewRace.jsp");
+			else if (request.getParameter("newShoe") != null)
+				response.sendRedirect("/FinalProject/Shoes/NewShoe.jsp");
 			else if (request.getParameter("newElliptical") != null) {
 				response.sendRedirect("/FinalProject/Elliptical/NewElliptical.jsp");
 			} else if (request.getParameter("viewRuns") != null) {
@@ -54,6 +56,9 @@ public class DashboardServlet extends HttpServlet {
 			} else if (request.getParameter("viewElliptical") != null) {
 				getElliptical(request);
 				response.sendRedirect("/FinalProject/Elliptical/ViewElliptical.jsp");
+			} else if (request.getParameter("viewShoes") != null) {
+				getShoes(request);
+				response.sendRedirect("/FinalProject/Shoes/ViewShoes.jsp");
 			}
 			else
 				response.sendRedirect("/FinalProject/Dashboard/Dashboard.jsp");
@@ -102,6 +107,17 @@ public class DashboardServlet extends HttpServlet {
 		String runs = ec.getSqlResult();
 		pool.freeConnection(connection);
 		session.setAttribute("elliptical", runs);
+	}
+	
+	private void getShoes(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
+		connection = pool.getConnection();
+		ShoeController sc = new ShoeController(connection);
+		sc.getAllShoes();
+		String runs = sc.getSqlResult();
+		pool.freeConnection(connection);
+		session.setAttribute("shoes", runs);
 	}
 
 }
