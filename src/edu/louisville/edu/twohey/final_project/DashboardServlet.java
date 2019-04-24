@@ -19,47 +19,58 @@ import javax.servlet.http.HttpSession;
 public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Connection connection = null;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DashboardServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/FinalProject/LoginPage/Login.jsp";
-		if (request.getParameter("logout") != null)
-			response.sendRedirect(url);
-		else if (request.getParameter("newRun") != null)
-			response.sendRedirect("/FinalProject/Runs/NewRun.jsp");
-		else if (request.getParameter("newRace") != null)
-			response.sendRedirect("/FinalProject/Races/NewRace.jsp");
-		else if (request.getParameter("viewRuns") != null)
-		{	
-			getRuns(request);
-			response.sendRedirect("/FinalProject/Runs/ViewRuns.jsp");
-		}
-		else if (request.getParameter("viewRaces") != null) {
-			getRaces(request);
-			response.sendRedirect("/FinalProject/Races/ViewRaces.jsp");
-		}
-		else
-			response.sendRedirect("/FinalProject/Dashboard/Dashboard.jsp");
+	public DashboardServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String url = "/FinalProject/LoginPage/Login.jsp";
+		HttpSession session = request.getSession();
+		if (session.getAttribute("userID") != null) {
+			if (request.getParameter("logout") != null)
+				response.sendRedirect(url);
+			else if (request.getParameter("newRun") != null)
+				response.sendRedirect("/FinalProject/Runs/NewRun.jsp");
+			else if (request.getParameter("newRace") != null)
+				response.sendRedirect("/FinalProject/Races/NewRace.jsp");
+			else if (request.getParameter("newElliptical") != null) {
+				response.sendRedirect("/FinalProject/Elliptical/NewElliptical.jsp");
+			} else if (request.getParameter("viewRuns") != null) {
+				getRuns(request);
+				response.sendRedirect("/FinalProject/Runs/ViewRuns.jsp");
+			} else if (request.getParameter("viewRaces") != null) {
+				getRaces(request);
+				response.sendRedirect("/FinalProject/Races/ViewRaces.jsp");
+			} else if (request.getParameter("viewElliptical") != null) {
+				getElliptical(request);
+				response.sendRedirect("/FinalProject/Elliptical/ViewElliptical.jsp");
+			}
+			else
+				response.sendRedirect("/FinalProject/Dashboard/Dashboard.jsp");
+		} else
+			response.sendRedirect(url);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	
+
 	private void getRuns(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
@@ -70,7 +81,7 @@ public class DashboardServlet extends HttpServlet {
 		pool.freeConnection(connection);
 		session.setAttribute("runs", runs);
 	}
-	
+
 	private void getRaces(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
@@ -80,6 +91,17 @@ public class DashboardServlet extends HttpServlet {
 		String runs = rc.getSqlResult();
 		pool.freeConnection(connection);
 		session.setAttribute("races", runs);
+	}
+	
+	private void getElliptical(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		ConnectionPool pool = ConnectionPool.getInstance("jdbc/RJTWOH01");
+		connection = pool.getConnection();
+		EllipticalController ec = new EllipticalController(connection);
+		ec.getAllElliptical();
+		String runs = ec.getSqlResult();
+		pool.freeConnection(connection);
+		session.setAttribute("elliptical", runs);
 	}
 
 }

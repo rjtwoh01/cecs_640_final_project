@@ -21,8 +21,8 @@ html, body {
 	margin-top: 20px
 }
 
-.login-pannel, .register-pannel, .dashboard-pannel, .new-run-pannel,
-	.view-runs-pannel {
+.login-pannel, .register-pannel, .dashboard-pannel, .new-run-pannel, .new-elliptical-pannel,
+	.view-runs-pannel, .new-elliptical-pannel, .view-elliptical-pannel {
 	overflow: none;
 	background-color: white;
 	width: 400px;
@@ -35,12 +35,21 @@ html, body {
 	height: 800px;
 }
 
+.view-elliptical-pannel {
+	width: 1250px;
+	height: 800px;
+}
+
 .register-pannel {
 	height: 700px !important;
 }
 
-.new-run-pannel {
+.new-run-pannel, .new-elliptical-pannel {
 	width: 600px;
+}
+
+.new-elliptical-pannel {
+	height: 500px;
 }
 
 .dashboard-pannel {
@@ -87,7 +96,7 @@ html, body {
 }
 
 .register-submit, .new-run-submit, .new-run-return-dashboard, 
-	.register-backl, .view-runs-return-dashboard {
+	.register-backl, .view-runs-return-dashboard, .view-elliptical-return-dashboard {
 	font-size: large;
 	margin-top: 25px;
 	margin-left: 160px
@@ -111,6 +120,10 @@ html, body {
 
 .view-runs-return-dashboard {
 	margin-left: 475px !important;
+}
+
+.view-elliptical-return-dashboard {
+	margin-left: 600px !important
 }
 
 .dashboard-submit {
@@ -237,6 +250,11 @@ input[type=submit] {
 	margin-top: 25px
 }
 
+.newEllipticleTitleWrapper {
+	margin-top: 25px;
+	margin-left: 50px;
+}
+
 .newRunInfoWrapper {
 	margin-top: 50px;
 }
@@ -251,4 +269,16 @@ input[type=submit] {
 	height: 600px;
 	margin-left: 5%;
 	overflow: auto;
+}
+
+.viewEllipticalTableWrapper {
+	width: 100%;
+	height: 600px;
+	margin-left: 1%;
+	overflow: auto;
+}
+
+.elliptical-entry {
+	margin-left: 50px;
+	margin-bottom: 25px;
 }
