@@ -96,7 +96,7 @@ html, body {
 }
 
 .register-submit, .new-run-submit, .new-run-return-dashboard, 
-	.register-backl, .view-runs-return-dashboard, .view-elliptical-return-dashboard {
+	.register-back, .view-runs-return-dashboard, .view-elliptical-return-dashboard {
 	font-size: large;
 	margin-top: 25px;
 	margin-left: 160px
