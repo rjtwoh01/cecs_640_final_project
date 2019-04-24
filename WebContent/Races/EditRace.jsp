@@ -62,7 +62,7 @@
 					</div>
 
 					<input class="new-run-submit"  type="Submit" value="Submit" name="submitNewRace"/>
-					<input class="new-run-return-dashboard"  type="Submit" value="View Runs" name="returnToViewRuns"/>
+					<input class="new-run-return-dashboard"  type="Submit" value="View Races" name="returnToViewRuns"/>
 					<div class="newRunErrorMessage"><%=errorMessage%></div>
 					<div class="newRunAddedMessage"><%=successMessage%></div>
 				</div>
